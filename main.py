@@ -14,18 +14,21 @@ def generate(goal="all", log=False):
     if log:
         print(f"boxes: {boxes}")
     
+    # open boxes following the loops
     unopened = [e for e in range(nb_prisoners)]
     while unopened:
         start_loop = unopened[0]
-        loop_length = 1
-        str_loop = str(start_loop)
         e = start_loop
+        loop_length = 1
+        str_loop = str(e)
         unopened.remove(e)
+        
         while boxes[e] != start_loop:
-            loop_length += 1
-            str_loop += "->" + str(boxes[e])
             e = boxes[e]
+            loop_length += 1
+            str_loop += "->" + str(e)
             unopened.remove(e)
+        
         max_loop_length = max(loop_length, max_loop_length)
         if log:
             print(f"len={loop_length}: {str_loop}")
